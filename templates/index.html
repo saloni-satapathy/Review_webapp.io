@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"> -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:ital@1&family=Yusei+Magic&display=swap" rel="stylesheet">
+     <style>
+         body{
+    background-image: url(https://media.giphy.com/media/28KYunfrG8CsSUSWAr/giphy.gif);
+    
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+table,tr,th,td{
+    font-family: 'Poppins', sans-serif;;
+    align-items: center;
+    margin: 5px 55px;
+    border: 2px solid white;
+    
+    border-collapse: collapse;
+
+}
+td{
+   width:100px;
+   height:max-content;
+   font-weight: bold;
+   font-style: italic;
+}
+form{
+    margin: 5px 30px;
+    padding:10px;
+    width:90%;
+}
+div{
+    align-items: center;
+    width:80%;
+   box-shadow: 5px;
+}
+tr{
+    width:60%;
+
+}
+table{
+    margin-left: 5px;
+   width:600px;
+   border-radius: 5px;
+   box-shadow: 5px;
+}
+table.fixed { 
+                table-layout: fixed; 
+            } 
+th,td{
+    padding:5px;
+    min-width:420px;
+    height: max-content;
+    font-weight: bold;
+}
+#name,#product{
+    min-width: 100%;
+}
+#submit{
+   border-radius: 5px;
+width:70px;
+height:50px;
+/* padding:5px; */
+background-color: aqua;
+}
+#review{
+    width:100%;
+    height:200px;
+}
+fieldset{
+   margin:20px 100px 50px 100px;
+  
+}
+@media (max-width: 768px) {
+fieldset{
+    width:100%;
+    margin:10px;
+}
+}
+        </style>
+  </head>
+   <body>
+      <h1 style = "text-align: center;font-family: 'Yusei Magic', sans-serif;text-shadow :2px 2px 2px rgb(139, 131, 131);">Review Form</h1>
+		
+      {% for message in form.name.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+      
+      
+      
+      <form action = "http://localhost:5000/" method = post>
+         <fieldset>
+            <legend>Review Form</legend>
+            
+            {{ form.hidden_tag() }}
+            
+            <div style = "font-size:20px; font-weight:bold;  margin-left:100px;font-family:  'Poppins', sans-serif;">
+               {{ form.name.label }} :
+               <span id="name">{{ form.name }}</span>
+               <br>
+               {{ form.product.label }} :
+               <span id="product">{{ form.product }}</span>
+               <br>
+               {{ form.review.label }}<br>
+               <div id="review">{{ form.review }}</div>
+               <br>
+    
+               <span id="submit">
+               {{ form.submit }}
+               </span>
+            </div>
+            
+         </fieldset>
+      </form>
+
+    <h3 style="text-align: center; font-family: 'Poppins', sans-serif;">Reviews</h3>
+    
+    {% if reviews|length < 1 %}
+    <h4 style="text-align: center;font-family: 'Yusei Magic', sans-serif;">There are no tasks. Create one below!</h4>
+ 
+    {% else %} 
+    <table style="font-family:'Poppins', sans-serif;">
+        <tr>
+            <th>Username</th>
+            <th>Product Name</th>
+            <th>Reviews</th>
+        </tr>
+        {% for review in reviews  %}
+            <tr>
+                <td>{{ review.username }}</td>
+                <td>{{ review.product }}</td>
+                <td>{{ review.review }}</td>
+                
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+   </body>
+</html>
