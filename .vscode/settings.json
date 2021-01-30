@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    // "json.schemas": [
+        
+    // ]
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_flask_sqlalchemy",
+        "pylint_flask",                
+    ]
+   
+}
